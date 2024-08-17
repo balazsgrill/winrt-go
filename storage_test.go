@@ -1,6 +1,8 @@
 package winrt_test
 
 import (
+	"math"
+	"runtime/debug"
 	"testing"
 
 	"github.com/go-ole/go-ole"
@@ -8,11 +10,13 @@ import (
 )
 
 func Test_GetStorageFolder(t *testing.T) {
+	debug.SetGCPercent(-1)
+	debug.SetMemoryLimit(math.MaxInt64)
 	err := ole.RoInitialize(1)
 	if err != nil {
 		t.Fatal(err)
 	}
-	op, err := storage.StorageFolderGetFolderFromPathAsync("c:\\Users\\Grill Balázs")
+	op, err := storage.StorageFolderGetFolderFromPathAsync("c:")
 	if err != nil {
 		t.Fatal(err)
 	}
