@@ -3,16 +3,16 @@ package winrt_test
 import (
 	"testing"
 
+	"github.com/go-ole/go-ole"
 	"github.com/saltosystems/winrt-go/windows/storage"
-	"golang.org/x/sys/windows"
 )
 
 func Test_GetStorageFolder(t *testing.T) {
-	err := windows.CoInitializeEx(0, windows.COINIT_MULTITHREADED)
+	err := ole.RoInitialize(1)
 	if err != nil {
 		t.Fatal(err)
 	}
-	op, err := storage.StorageFolderGetFolderFromPathAsync("c:")
+	op, err := storage.StorageFolderGetFolderFromPathAsync("c:\\Users\\Grill Balázs")
 	if err != nil {
 		t.Fatal(err)
 	}
