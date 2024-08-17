@@ -9,6 +9,8 @@ package winrt
 //go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.Deferral
 //go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.DeferralCompletedHandler
 //go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.IReference`1
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.Uri
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.WwwFormUrlDecoder
 
 // advertisement
 //go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Devices.Bluetooth.Advertisement.BluetoothLEAdvertisementWatcherStatus
@@ -70,7 +72,49 @@ package winrt
 //go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Storage.Streams.DataReader -method-filter FromBuffer -method-filter ReadBytes -method-filter !*
 //go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Storage.Streams.IDataWriter -method-filter WriteBytes -method-filter DetachBuffer -method-filter !*
 //go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Storage.Streams.DataWriter -method-filter WriteBytes -method-filter DetachBuffer -method-filter DataWriter -method-filter Close -method-filter !*
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Storage.Streams.IInputStreamReference
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Storage.Streams.IRandomAccessStreamReference
 
 // vector
 //go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.Collections.IVector`1
 //go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.Collections.IVectorView`1
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.Collections.IIterable`1
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.Collections.IIterator`1
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -debug -class Windows.Foundation.Collections.IMap`2 -method-filter !GetView
+
+// storage
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageFolder
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.StorageFolder -method-filter GetFolderFromPathAsync -method-filter !*
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageItem
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.StorageItemTypes
+
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.Provider.StorageProviderHydrationPolicy
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.Provider.StorageProviderHydrationPolicyModifier
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.Provider.StorageProviderPopulationPolicy
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.Provider.StorageProviderInSyncPolicy
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.Provider.StorageProviderHardlinkPolicy
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.Provider.StorageProviderProtectionMode
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.Provider.StorageProviderSyncRootManager
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.Provider.StorageProviderSyncRootInfo
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.Provider.UIStatus
+
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.CreationCollisionOption
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.NameCollisionOption
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.StorageDeleteOption
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.FileAttributes
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageItemProperties -method-filter !get_Properties
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageItemProperties2
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageItem2
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageItemPropertiesWithProvider
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.StorageProvider
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageFolder2
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.StorageFile -method-filter !*
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageFile
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageFilePropertiesWithAvailability
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.FileAccessMode
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.StorageOpenOptions
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.IStorageFile2
+
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.FileProperties.ThumbnailMode
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.FileProperties.PropertyPrefetchOptions
+//go:generate go run github.com/saltosystems/winrt-go/cmd/winrt-go-gen -class Windows.Storage.FileProperties.ThumbnailOptions
