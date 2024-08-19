@@ -6,6 +6,8 @@ import (
 	"testing"
 
 	"github.com/go-ole/go-ole"
+	"github.com/saltosystems/winrt-go"
+	"github.com/saltosystems/winrt-go/windows/foundation"
 	"github.com/saltosystems/winrt-go/windows/storage"
 )
 
@@ -16,10 +18,20 @@ func Test_GetStorageFolder(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	op, err := storage.StorageFolderGetFolderFromPathAsync("c:")
+	op, err := storage.StorageFolderGetFolderFromPathAsync("c:\\")
 	if err != nil {
 		t.Fatal(err)
 	}
+	semaphore := make(chan bool)
+	iid := winrt.ParameterizedInstanceGUID(foundation.GUIDAsyncOperationCompletedHandler, storage.SignatureStorageFolder)
+	handler := foundation.NewAsyncOperationCompletedHandler(ole.NewGUID(iid), func(instance *foundation.AsyncOperationCompletedHandler, asyncInfo *foundation.IAsyncOperation, asyncStatus foundation.AsyncStatus) {
+		semaphore <- true
+	})
+	err = op.SetCompleted(handler)
+	if err != nil {
+		t.Fatal(err)
+	}
+	<-semaphore
 	ptr, err := op.GetResults()
 	if err != nil {
 		t.Fatal(err)

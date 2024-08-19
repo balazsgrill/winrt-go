@@ -6,6 +6,7 @@
 package storage
 
 import (
+	"runtime"
 	"syscall"
 	"unsafe"
 
@@ -67,10 +68,12 @@ func StorageFolderGetFolderFromPathAsync(path string) (*foundation.IAsyncOperati
 	}
 	hr, _, _ := syscall.SyscallN(
 		v.VTable().StorageFolderGetFolderFromPathAsync,
-		0,                             // this is a static func, so there's no this
+		uintptr(unsafe.Pointer(v)),                             // this is a static func, so there's no this
 		uintptr(pathHStr),             // in string
 		uintptr(unsafe.Pointer(&out)), // out foundation.IAsyncOperation
 	)
+	runtime.KeepAlive(pathHStr)
+	runtime.KeepAlive(inspectable)
 
 	if hr != 0 {
 		return nil, ole.NewError(hr)
